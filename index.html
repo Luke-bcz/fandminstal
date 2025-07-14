@@ -955,6 +955,15 @@
                     }
                 });
             });
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (navUl.classList.contains('open')) {
+                    if (!hamburger.contains(event.target) && !navUl.contains(event.target)) {
+                        hamburger.classList.remove('active');
+                        navUl.classList.remove('open');
+                    }
+                }
+            });
         });
 
         // Rolling image gallery
