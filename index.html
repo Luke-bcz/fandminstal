@@ -756,6 +756,7 @@
                     <div>
                         <h4>Telefon</h4>
                         <p><span id="phone-number" class="phone-number phone-reveal-text">Apăsați pentru a afișa</span></p>
+                        <span id="phone-numbers-list" class="hidden"></span>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -819,12 +820,18 @@
 
             // Phone number reveal logic (bot-resistant)
             const phoneSpan = document.getElementById('phone-number');
-            if (phoneSpan) {
+            const phoneNumbersList = document.getElementById('phone-numbers-list');
+            if (phoneSpan && phoneNumbersList) {
                 phoneSpan.addEventListener('click', function() {
-                    const number = ['+40', ' ', '749', ' ', '420', ' ', '904'].join('');
-                    this.innerText = number;
-                    this.style.cursor = 'default';
-                    this.classList.remove('phone-reveal-text');
+                    const numbers = [
+                        ['+40', ' ', '749', ' ', '420', ' ', '904'].join(''),
+                        ['+40', ' ', '747', ' ', '858', ' ', '578'].join('') // <-- Add your second number here
+                    ];
+                    phoneNumbersList.innerHTML = numbers.map(num =>
+                        `<a href="tel:${num.replace(/\s/g, '')}" class="phone-number" style="display:block;">${num}</a>`
+                    ).join('');
+                    phoneNumbersList.classList.remove('hidden');
+                    this.style.display = 'none';
                 });
             }
         });
